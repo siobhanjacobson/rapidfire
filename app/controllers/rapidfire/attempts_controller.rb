@@ -65,11 +65,7 @@ module Rapidfire
     #     end
     #   end
     def after_answer_path_for
-      if @survey.after_survey_content.present?
-        survey_attempt_path(@survey, @attempt_builder.to_model)
-      else
-        surveys_path
-      end
+      surveys_path
     end
 
     def rapidfire_current_scoped
