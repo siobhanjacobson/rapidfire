@@ -10,14 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170701191411) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 2017_07_01_191411) do
 
   create_table "rapidfire_answers", force: :cascade do |t|
-    t.bigint "attempt_id"
-    t.bigint "question_id"
+    t.integer "attempt_id"
+    t.integer "question_id"
     t.text "answer_text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -26,17 +23,18 @@ ActiveRecord::Schema.define(version: 20170701191411) do
   end
 
   create_table "rapidfire_attempts", force: :cascade do |t|
-    t.bigint "survey_id"
+    t.integer "survey_id"
     t.string "user_type"
-    t.bigint "user_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["survey_id"], name: "index_rapidfire_attempts_on_survey_id"
+    t.index ["user_id", "user_type"], name: "index_rapidfire_attempts_on_user_id_and_user_type"
     t.index ["user_type", "user_id"], name: "index_rapidfire_attempts_on_user_type_and_user_id"
   end
 
   create_table "rapidfire_questions", force: :cascade do |t|
-    t.bigint "survey_id"
+    t.integer "survey_id"
     t.string "type"
     t.string "question_text"
     t.string "default_text"
@@ -50,11 +48,11 @@ ActiveRecord::Schema.define(version: 20170701191411) do
   end
 
   create_table "rapidfire_surveys", force: :cascade do |t|
-    t.string   "name"
-    t.text     "introduction"
+    t.string "name"
+    t.text "introduction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text     "after_survey_content"
+    t.text "after_survey_content"
   end
 
 end
