@@ -52,6 +52,8 @@ module Rapidfire
                       Attempt.find_by(id: params[:id]).user
                     end
       answer_params.merge(user: survey_user, survey: @survey, attempt_id: params[:id])
+      puts '!!!!!!!!!!!!!'
+      p answer_params
     end
 
     def attempt_params_for_find
@@ -73,7 +75,7 @@ module Rapidfire
     end
 
     def rapidfire_current_scoped
-      send 'current_'+scoped.to_s
+      send 'current_' + scoped.to_s
     end
   end
 end
