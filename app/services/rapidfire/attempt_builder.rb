@@ -53,9 +53,6 @@ module Rapidfire
       else
         @attempt = Attempt.new(user: user, survey: survey)
         @answers = build_answers(@attempt)
-        # @answers = @survey.questions.collect do |question|
-        #   @attempt.answers.build(question_id: question.id)
-        # end
       end
     end
 
