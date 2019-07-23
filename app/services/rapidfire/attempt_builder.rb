@@ -46,15 +46,22 @@ module Rapidfire
     def build_attempt(attempt_id)
       if attempt_id.present?
         @attempt = Attempt.find(attempt_id)
-        self.answers = @attempt.answers
+        self.answers = @attempt.answers || build_answers(@attempt)
         self.user = @attempt.user
         self.survey = @attempt.survey
         self.questions = @survey.questions
       else
         @attempt = Attempt.new(user: user, survey: survey)
-        @answers = @survey.questions.collect do |question|
-          @attempt.answers.build(question_id: question.id)
-        end
+        @answers = build_answers(@attempt)
+        # @answers = @survey.questions.collect do |question|
+        #   @attempt.answers.build(question_id: question.id)
+        # end
+      end
+    end
+
+    def build_answers(attempt)
+      @survey.questions.collect do |question|
+        attempt.answers.build(question_id: question.id)
       end
     end
 
