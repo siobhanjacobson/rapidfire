@@ -46,7 +46,7 @@ module Rapidfire
     def build_attempt(attempt_id)
       if attempt_id.present?
         @attempt = Attempt.find(attempt_id)
-        self.answers = @attempt.answers || build_answers(@attempt)
+        self.answers = @attempt.answers.empty? ? build_answers(@attempt) : @attempt.answers
         self.user = @attempt.user
         self.survey = @attempt.survey
         self.questions = @survey.questions

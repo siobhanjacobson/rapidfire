@@ -25,8 +25,6 @@ module Rapidfire
     end
 
     def edit
-      p '!!!!!!!!!!!!!!!!'
-      p attempt_params
       @attempt_builder = AttemptBuilder.new(attempt_params)
       # return unless @attempt_builder.answers.empty?
       #
