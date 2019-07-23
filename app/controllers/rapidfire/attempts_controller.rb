@@ -26,6 +26,11 @@ module Rapidfire
 
     def edit
       @attempt_builder = AttemptBuilder.new(attempt_params)
+      return unless @attempt_builder.answers.empty?
+
+      attempt_params[:survey].questions.collect do |question|
+        @attempt_builder.answers.build(question_id: question.id)
+      end
     end
 
     def update
@@ -52,8 +57,6 @@ module Rapidfire
                       Attempt.find_by(id: params[:id]).user
                     end
       answer_params.merge(user: survey_user, survey: @survey, attempt_id: params[:id])
-      puts '!!!!!!!!!!!!!'
-      p answer_params
     end
 
     def attempt_params_for_find
