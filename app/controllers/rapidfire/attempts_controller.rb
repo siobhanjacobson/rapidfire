@@ -47,12 +47,6 @@ module Rapidfire
     def attempt_params
       answer_params = { params: (params[:attempt] || {}) }
       answer_params.merge(user: current_user, survey: @survey, attempt_id: params[:id])
-      # survey_user = if params[:id].nil?
-      #                 current_user
-      #               else
-      #                 Attempt.find_by(id: params[:id]).user
-      #               end
-      # answer_params.merge(user: survey_user, survey: @survey, attempt_id: params[:id])
     end
 
     def attempt_params_for_find
