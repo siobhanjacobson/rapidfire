@@ -3,6 +3,8 @@ module Rapidfire
     belongs_to :question
     belongs_to :attempt, inverse_of: :answers
 
+    scope :ordered, -> { joins(:question).order('rapidfire_questions.position') }
+
     validates :question, :attempt, presence: true
     validate  :verify_answer_text
 
