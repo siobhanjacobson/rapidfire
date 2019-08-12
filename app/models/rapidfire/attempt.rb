@@ -9,5 +9,12 @@ module Rapidfire
     if Rails::VERSION::MAJOR == 3
       attr_accessible :survey, :user
     end
+
+    def complete?
+      # Check each answer exists.
+      survey.questions.collect do |question|
+        return false unless answer.find_by(attempt: self, question: question)
+      end
+    end
   end
 end
