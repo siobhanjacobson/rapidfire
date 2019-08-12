@@ -13,7 +13,7 @@ module Rapidfire
     def complete?
       # Check each answer exists.
       survey.questions.collect do |question|
-        return false unless answer.find_by(attempt: self, question: question)
+        return false unless Answer.find_by(attempt: self, question: question)
       end
     end
   end
