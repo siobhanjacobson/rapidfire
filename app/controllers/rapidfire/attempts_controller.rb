@@ -18,7 +18,7 @@ module Rapidfire
       @attempt_builder = AttemptBuilder.new(attempt_params)
 
       if @attempt_builder.save
-        redirect_to after_answer_path_for
+        redirect_to after_answer_path_for(@attempt_builder.to_model.id)
       else
         render :new
       end
@@ -32,7 +32,7 @@ module Rapidfire
       @attempt_builder = AttemptBuilder.new(attempt_params)
 
       if @attempt_builder.save
-        redirect_to after_answer_path_for
+        redirect_to after_answer_path_for(@attempt_builder.to_model.id)
       else
         render :edit
       end
@@ -63,7 +63,7 @@ module Rapidfire
     #       main_app.root_path
     #     end
     #   end
-    def after_answer_path_for
+    def after_answer_path_for(attempt_id)
       surveys_path
     end
 
